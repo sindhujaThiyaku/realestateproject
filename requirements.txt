@@ -1,0 +1,6 @@
+Django==1.11.5
+Pygments==2.2.0
+argparse==1.2.1
+djangorestframework==3.8.2
+pytz==2018.4
+wsgiref==0.1.2
