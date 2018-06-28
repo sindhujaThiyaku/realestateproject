@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'loginPage'
+    'Login'
 ]
 
 MIDDLEWARE = [
@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'realEstate.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'realestate',
+        'USER': 'next',
+        'PASSWORD': 'next',
+        'HOST': '192.168.11.98',
+        'PORT': '5432'
     }
 }
 
@@ -126,3 +130,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'

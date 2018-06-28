@@ -5,4 +5,4 @@ from django.apps import AppConfig
 
 
 class LoginpageConfig(AppConfig):
-    name = 'loginPage'
+    name = 'Login'

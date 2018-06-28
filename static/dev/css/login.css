@@ -40,3 +40,40 @@ h6 {
         height: 1040px;
     }
 }
+
+.btn-indigo {
+    background-color: #F04E54!important;
+}
+
+.ins-ic {
+    color: #F04E54!important;
+}
+
+html,
+body,
+header,
+.view {
+  height: 100%;
+}
+
+@media (max-width: 740px) {
+  html,
+  body,
+  header,
+  .view {
+    height: 1000px;
+  }
+}
+@media (min-width: 800px) and (max-width: 850px) {
+  html,
+  body,
+  header,
+  .view {
+    height: 650px;
+  }
+}
+/*@media only screen and (min-width: 768px) {
+     For desktop: 
+    .card-body {width: 100%;}
+
+}*/

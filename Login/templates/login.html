@@ -1,0 +1,130 @@
+{% extends 'landingpage.html' %} {%load static%} {% block links %}
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Bootstrap core CSS -->
+<link href="{% static 'ui/css/bootstrap.min.css' %}" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="{% static 'ui/css/mdb.min.css' %}" rel="stylesheet">
+<link href="{% static 'dev/css/login.css' %}" rel="stylesheet"
+	type="text/css">
+{% endblock %} {% block content %}
+<div class="home">
+
+	<!-- Home Slider -->
+	<div class="home_slider_background"
+		style="background-image: url(/static/ui/images/home_slider_bcg.jpg)">
+		<div class="col-md-6 col-xl-5 mb-4" id="loginPage" style="float: right;margin-top: 15%;width: 25%;">
+		<div class="card wow fadeInRight" data-wow-delay="0.3s">
+			<div class="card-body">
+				<div class="text-center">
+					<h3 class="white-text">
+						<i class="fa fa-user white-text"></i> Login
+					</h3>
+					<hr class="hr-light">
+				</div>
+				<p id="p6"></p>
+				<div class="md-form">
+					<i class="fa fa-user prefix white-text active"></i> <input
+						type="text" id="loginuser" class="white-text form-control"> <label
+						for="form3" class="active">Username</label>
+				</div>
+				<p id="p0"></p>
+				<div class="md-form">
+					<i class="fa fa-envelope prefix white-text active"></i> <input
+						type="email" id="loginpwd" class="white-text form-control"> <label
+						for="form2" class="active">Password</label>
+				</div>
+				<div class="text-center mt-4">
+					<button id="btn-signin" class="btn btn-indigo">Login</button>
+					<hr class="hr-light mb-3 mt-4">
+					<div class="inline-ul text-center d-flex justify-content-center">
+						<a class="p-2 m-2 tw-ic"> <i class="fa fa-twitter white-text"></i>
+						</a> <a class="p-2 m-2 li-ic"> <i
+							class="fa fa-linkedin white-text"> </i>
+						</a> <a class="p-2 m-2 ins-ic"> <i
+							class="fa fa-instagram white-text"> </i>
+						</a>
+					</div>
+				</div>
+				<div class="text-center mt-4">
+					<a class="p-2 m-2 ins-ic" id="loginhref"> Not a member?
+						Join with us </a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-xl-5 mb-4" id="registerPage" style="float: right;margin-top: 15%;width: 30%;display:none">
+		<div class="card wow fadeInRight" data-wow-delay="0.3s">
+			<div class="card-body">
+				<div class="text-center">
+					<h3 class="white-text">
+						<i class="fa fa-user white-text"></i> Register
+					</h3>
+					<hr class="hr-light">
+				</div>
+				<p id="p0"></p>
+				<div class="md-form">
+					<i class="fa fa-user prefix white-text active"></i> <input
+						type="text" id="username" class="white-text form-control"> <label
+						for="username" class="active">Username</label>
+				</div>
+				<p id="p1"></p>
+				<div class="md-form">
+					<i class="fa fa-envelope prefix white-text active"></i> <input
+						type="email" id="usermail" class="white-text form-control"> <label
+						for="usermail" class="active">Email</label>
+				</div>
+				<p id="p2"></p>
+				<div class="md-form">
+					<i class="fa fa-lock prefix white-text active"></i> <input
+						type="password" id="userpswd" class="white-text form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" >
+					<label for="userpswd" class="active">Password</label>
+				</div>
+				<p id="p3"></p>
+				<div class="md-form">
+					<i class="fa fa-lock prefix white-text active"></i> <input
+						type="password" id="usercpswd" class="white-text form-control">
+					<label for="usercpswd" class="active">Confirm Password</label>
+				</div>
+				<p id="p4"></p>
+				<div class="md-form">
+					<i class="fa fa-mobile-phone prefix white-text active"></i> <input
+						type="tel" id="usernumber" class="white-text form-control"  maxlength="10">
+					<label for="usernumber" class="active">Mobile Number</label>
+				</div>
+				<p id="p5"></p>
+				<div class="text-center mt-4">
+					<button class="btn btn-indigo" id="btn-signup">Sign up</button>
+					<button class="btn btn-indigo" id="btn-reset">Reset</button>
+					<hr class="hr-light mb-3 mt-4">
+
+					<div class="inline-ul text-center d-flex justify-content-center">
+						<a class="p-2 m-2 tw-ic"> <i class="fa fa-twitter white-text"></i>
+						</a> <a class="p-2 m-2 li-ic"> <i
+							class="fa fa-linkedin white-text"> </i>
+						</a> <a class="p-2 m-2 ins-ic"> <i
+							class="fa fa-instagram white-text"> </i>
+						</a>
+					</div>
+				</div>
+				<div class="text-center mt-4">
+					<a id="registerhref" class="p-2 m-2 ins-ic" > Already a member?
+						Sign in </a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> 
+</div>
+
+{% endblock %} {% block scripts %}
+
+<script type="text/javascript" src="{% static 'ui/js/pooper.min.js' %}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript"
+	src="{% static 'ui/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'ui/js/mdb.min.js' %}"></script>
+<script src="{% static 'dev/js/login.js' %}"></script>
+
+{% endblock %}
+
