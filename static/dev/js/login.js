@@ -67,11 +67,10 @@ $("#btn-signup").click(function(){
 	return false;
 	}
 	else {
-		console.log({"username":username,"usermail":usermail,"userpswd":userpswd,"usernumber":usernumber});
 		$.ajax({
 		type:'POST',
 		url:'user_register/',
-		data:{"username":username,"email":usermail,"password":userpswd,"mobile_number":usernumber},
+		data:{"username":username,"email":usermail,"password":userpswd,"mobile_number":usernumber,'is_active':false},
 		async:true,
 	}).done(function(json_data){
 		var data = JSON.parse(json_data)

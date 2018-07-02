@@ -21,7 +21,7 @@ urlpatterns = [
 
     url(r'^$', views.login, name="login render"),
     url(r'^user_register/$', views.user_register, name="user register"),
-    
+    url(r'^account_verify/(?P<token>[\w-]+)/$', views.user_activate, name="account_verify"),
     # url(r'^about_us/', aboutUsView.as_view(), name='about_us'),
     # url(r'^dashboard/', dashboardDetail.as_view(), name='dashboard'),
     # url(r'', LoginDetail.as_view(), name='loginForm'),

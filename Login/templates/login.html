@@ -13,6 +13,7 @@
 	<!-- Home Slider -->
 	<div class="home_slider_background"
 		style="background-image: url(/static/ui/images/home_slider_bcg.jpg)">
+		{% if !message %}
 		<div class="col-md-6 col-xl-5 mb-4" id="loginPage" style="float: right;margin-top: 15%;width: 25%;">
 		<div class="card wow fadeInRight" data-wow-delay="0.3s">
 			<div class="card-body">
@@ -53,67 +54,80 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-6 col-xl-5 mb-4" id="registerPage" style="float: right;margin-top: 15%;width: 30%;display:none">
-		<div class="card wow fadeInRight" data-wow-delay="0.3s">
-			<div class="card-body">
-				<div class="text-center">
-					<h3 class="white-text">
-						<i class="fa fa-user white-text"></i> Register
-					</h3>
-					<hr class="hr-light">
-				</div>
-				<p id="p0"></p>
-				<div class="md-form">
-					<i class="fa fa-user prefix white-text active"></i> <input
-						type="text" id="username" class="white-text form-control"> <label
-						for="username" class="active">Username</label>
-				</div>
-				<p id="p1"></p>
-				<div class="md-form">
-					<i class="fa fa-envelope prefix white-text active"></i> <input
-						type="email" id="usermail" class="white-text form-control"> <label
-						for="usermail" class="active">Email</label>
-				</div>
-				<p id="p2"></p>
-				<div class="md-form">
-					<i class="fa fa-lock prefix white-text active"></i> <input
-						type="password" id="userpswd" class="white-text form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" >
-					<label for="userpswd" class="active">Password</label>
-				</div>
-				<p id="p3"></p>
-				<div class="md-form">
-					<i class="fa fa-lock prefix white-text active"></i> <input
-						type="password" id="usercpswd" class="white-text form-control">
-					<label for="usercpswd" class="active">Confirm Password</label>
-				</div>
-				<p id="p4"></p>
-				<div class="md-form">
-					<i class="fa fa-mobile-phone prefix white-text active"></i> <input
-						type="tel" id="usernumber" class="white-text form-control"  maxlength="10">
-					<label for="usernumber" class="active">Mobile Number</label>
-				</div>
-				<p id="p5"></p>
-				<div class="text-center mt-4">
-					<button class="btn btn-indigo" id="btn-signup">Sign up</button>
-					<button class="btn btn-indigo" id="btn-reset">Reset</button>
-					<hr class="hr-light mb-3 mt-4">
-
-					<div class="inline-ul text-center d-flex justify-content-center">
-						<a class="p-2 m-2 tw-ic"> <i class="fa fa-twitter white-text"></i>
-						</a> <a class="p-2 m-2 li-ic"> <i
-							class="fa fa-linkedin white-text"> </i>
-						</a> <a class="p-2 m-2 ins-ic"> <i
-							class="fa fa-instagram white-text"> </i>
-						</a>
+	{% endif %}
+		{%if status == 1%}
+		 <div class="alert alert-success">
+			<strong>Success!</strong> Your account has been activated. Click here for <a href="/login/">login</a>
+		</div>
+		{% endif %} 
+		{%if status == 0%}
+		<div class="alert alert-warning">
+			<strong>Warning!</strong> You already verified your account. Click here for <a href="/login/">login</a>
+		</div>
+		{% endif %}
+		{% if !message %}
+			<div class="col-md-6 col-xl-5 mb-4" id="registerPage" style="float: right;margin-top: 15%;width: 30%;display:none">
+			<div class="card wow fadeInRight" data-wow-delay="0.3s">
+				<div class="card-body">
+					<div class="text-center">
+						<h3 class="white-text">
+							<i class="fa fa-user white-text"></i> Register
+						</h3>
+						<hr class="hr-light">
 					</div>
-				</div>
-				<div class="text-center mt-4">
-					<a id="registerhref" class="p-2 m-2 ins-ic" > Already a member?
-						Sign in </a>
+					<p id="p0"></p>
+					<div class="md-form">
+						<i class="fa fa-user prefix white-text active"></i> <input
+							type="text" id="username" class="white-text form-control"> <label
+							for="username" class="active">Username</label>
+					</div>
+					<p id="p1"></p>
+					<div class="md-form">
+						<i class="fa fa-envelope prefix white-text active"></i> <input
+							type="email" id="usermail" class="white-text form-control"> <label
+							for="usermail" class="active">Email</label>
+					</div>
+					<p id="p2"></p>
+					<div class="md-form">
+						<i class="fa fa-lock prefix white-text active"></i> <input
+							type="password" id="userpswd" class="white-text form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" >
+						<label for="userpswd" class="active">Password</label>
+					</div>
+					<p id="p3"></p>
+					<div class="md-form">
+						<i class="fa fa-lock prefix white-text active"></i> <input
+							type="password" id="usercpswd" class="white-text form-control">
+						<label for="usercpswd" class="active">Confirm Password</label>
+					</div>
+					<p id="p4"></p>
+					<div class="md-form">
+						<i class="fa fa-mobile-phone prefix white-text active"></i> <input
+							type="tel" id="usernumber" class="white-text form-control"  maxlength="10">
+						<label for="usernumber" class="active">Mobile Number</label>
+					</div>
+					<p id="p5"></p>
+					<div class="text-center mt-4">
+						<button class="btn btn-indigo" id="btn-signup">Sign up</button>
+						<button class="btn btn-indigo" id="btn-reset">Reset</button>
+						<hr class="hr-light mb-3 mt-4">
+	
+						<div class="inline-ul text-center d-flex justify-content-center">
+							<a class="p-2 m-2 tw-ic"> <i class="fa fa-twitter white-text"></i>
+							</a> <a class="p-2 m-2 li-ic"> <i
+								class="fa fa-linkedin white-text"> </i>
+							</a> <a class="p-2 m-2 ins-ic"> <i
+								class="fa fa-instagram white-text"> </i>
+							</a>
+						</div>
+					</div>
+					<div class="text-center mt-4">
+						<a id="registerhref" class="p-2 m-2 ins-ic" > Already a member?
+							Sign in </a>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+		{% endif %}
 </div> 
 </div>
 

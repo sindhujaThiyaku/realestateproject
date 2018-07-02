@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'realEstate.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'realestate',
+        'NAME': 'realEstate',
         'USER': 'next',
         'PASSWORD': 'next',
-        'HOST': '192.168.11.98',
+        'HOST': 'localhost',
         'PORT': '5432'
     }
 }
@@ -119,6 +119,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'sindhu1191sece@gmail.com' 
+EMAIL_HOST_PASSWORD = 'Sindhuja@123' 
+EMAIL_PORT = 587
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
