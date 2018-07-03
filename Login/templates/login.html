@@ -13,7 +13,7 @@
 	<!-- Home Slider -->
 	<div class="home_slider_background"
 		style="background-image: url(/static/ui/images/home_slider_bcg.jpg)">
-		{% if !message %}
+		{% if template %}
 		<div class="col-md-6 col-xl-5 mb-4" id="loginPage" style="float: right;margin-top: 15%;width: 25%;">
 		<div class="card wow fadeInRight" data-wow-delay="0.3s">
 			<div class="card-body">
@@ -37,6 +37,9 @@
 				</div>
 				<div class="text-center mt-4">
 					<button id="btn-signin" class="btn btn-indigo">Login</button>
+					<div class="text-center mt-4">
+						<a id="registerhref" class="p-2 m-2 ins-ic" > Forgot Password? </a>
+					</div>
 					<hr class="hr-light mb-3 mt-4">
 					<div class="inline-ul text-center d-flex justify-content-center">
 						<a class="p-2 m-2 tw-ic"> <i class="fa fa-twitter white-text"></i>
@@ -56,16 +59,16 @@
 	</div>
 	{% endif %}
 		{%if status == 1%}
-		 <div class="alert alert-success">
+		 <div class="alert alert-success" style="text-align: center; margin-top: 25%;">
 			<strong>Success!</strong> Your account has been activated. Click here for <a href="/login/">login</a>
 		</div>
 		{% endif %} 
 		{%if status == 0%}
-		<div class="alert alert-warning">
+		<div class="alert alert-info" style="text-align: center; margin-top: 25%;">
 			<strong>Warning!</strong> You already verified your account. Click here for <a href="/login/">login</a>
 		</div>
 		{% endif %}
-		{% if !message %}
+		{% if template %}
 			<div class="col-md-6 col-xl-5 mb-4" id="registerPage" style="float: right;margin-top: 15%;width: 30%;display:none">
 			<div class="card wow fadeInRight" data-wow-delay="0.3s">
 				<div class="card-body">
@@ -128,6 +131,63 @@
 			</div>
 		</div>
 		{% endif %}
+			<div class="col-md-6 col-xl-5 mb-4" id="forgotPwdPage" style="float: right;margin-top: 15%;width: 30%;display:none">
+			<div class="card wow fadeInRight" data-wow-delay="0.3s">
+				<div class="card-body">
+					<div class="text-center">
+						<h3 class="white-text">
+							<i class="fa fa-user white-text"></i> Forgot Password
+						</h3>
+						<hr class="hr-light">
+					</div>
+					<p id="p1"></p>
+					<div class="md-form">
+						<i class="fa fa-envelope prefix white-text active"></i> <input
+							type="email" id="forgotemail" class="white-text form-control"> <label
+							for="forgotemail" class="active">Email</label>
+					</div>
+					<div class="text-center mt-4">
+						<button class="btn btn-indigo" id="btn-signup">Submit</button>
+						<button class="btn btn-indigo" id="btn-reset">Reset</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-6 col-xl-5 mb-4" id="resetPwdPage" style="float: right;margin-top: 15%;width: 30%;display:none">
+			<div class="card wow fadeInRight" data-wow-delay="0.3s">
+				<div class="card-body">
+					<div class="text-center">
+						<h3 class="white-text">
+							<i class="fa fa-user white-text"></i> Change Password
+						</h3>
+						<hr class="hr-light">
+					</div>
+					<p id="p1"></p>
+					<div class="md-form">
+						<i class="fa fa-envelope prefix white-text active"></i> <input
+							type="password" id="oldpwd" class="white-text form-control"> <label
+							for="oldpwd" class="active">Old Password</label>
+					</div>
+					<p id="p1"></p>
+					<div class="md-form">
+						<i class="fa fa-envelope prefix white-text active"></i> <input
+							type="password" id="newpwd" class="white-text form-control"> <label
+							for="newpwd" class="active">New Password</label>
+					</div>
+					<p id="p1"></p>
+					<div class="md-form">
+						<i class="fa fa-envelope prefix white-text active"></i> <input
+							type="password" id="confirmpwd" class="white-text form-control"> <label
+							for="confirmpwd" class="active">Confirm Password</label>
+					</div>
+					<div class="text-center mt-4">
+						<button class="btn btn-indigo" id="btn-signup">Submit</button>
+						<button class="btn btn-indigo" id="btn-reset">Reset</button>
+					</div>
+				</div>
+			</div>
+		</div>
 </div> 
 </div>
 

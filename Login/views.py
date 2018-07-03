@@ -23,7 +23,7 @@ redis_con = redis.StrictRedis(host="localhost", port="6379", db="0")
 @api_view(['GET'])
 @renderer_classes((TemplateHTMLRenderer,))
 def login(request):
-    return Response(template_name='login.html')
+    return Response({'template':'login'},template_name='login.html')
 
 @api_view(['POST'])
 def user_register(request):
