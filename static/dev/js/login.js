@@ -24,6 +24,28 @@ $("#btn-reset").click(function(){
 
 })
 
+function ajaxCall(type,url,data,async){
+	var status = false;
+	$.ajax({
+		type:type,
+		url:url,
+		data:data,
+		async:async,
+	}).done(function(json_data){
+		if(json_data['status'] == 1){
+//			alert_status('success',json_data['message']);
+//			clearform();
+			status = true;
+		}
+	   else if(json_data['status'] == 0){
+//			alert_status('error',json_data['message']);
+//			clearform();
+			status = false;
+		}
+	});
+	return status;
+}
+
 $("#btn-signup").click(function(){
 	var username = $('#username').val();
 	var usermail = $('#usermail').val();
@@ -67,23 +89,7 @@ $("#btn-signup").click(function(){
 	return false;
 	}
 	else {
-		$.ajax({
-		type:'POST',
-		url:'user_register/',
-		data:{"username":username,"email":usermail,"password":userpswd,"mobile_number":usernumber,'is_active':false},
-		async:true,
-	}).done(function(json_data){
-		var data = JSON.parse(json_data)
-		if(data['status'] == 1){
-			alert_status('success',data['message']);
-			clearform();
-		}
-	   else if(data['status'] == 0){
-			alert_status('error',data['message']);
-			clearform();
-		}
-		quotes_data_view();
-	});
+		ajaxCall('POST','user_register/',{"username":username,"email":usermail,"password":userpswd,"mobile_number":usernumber,'is_active':false},true)
 	}
 
 
@@ -96,35 +102,29 @@ $("#btn-signin").click(function(){
 	if(loginusername==''){
 		$('#p6').text("* Please enter the username").css({ 'color': 'white', 'font-size': '100%' }); 
 		$("#loginuser").focus();
+		return false;
 	}
 	else if(loginuserpswd==''){
 		$('#p7').text("* Please enter the Password").css({ 'color': 'white', 'font-size': '100%' }); 
 		$("#loginpwd").focus();
+		return false;
 	}
 	else if(loginusername==''&& loginuserpswd==''){
 		$('#p6').text("* Please enter the username").css({ 'color': 'white', 'font-size': '100%' }); 
 		$("#loginuser").focus();
 		$('#p7').text("* Please enter the Password").css({ 'color': 'white', 'font-size': '100%' }); 
 		$("#loginpwd").focus();
+		return false;
 	}
 	else{
-		$.ajax({
-			type:'POST',
-			url:'login/user_login/',
-			data:{"username":loginusername,"userpswd":loginpwd},
-			async:true,
-		}).done(function(json_data){
-			var data = JSON.parse(json_data)
-			if(data['status'] == 1){
-				alert_status('success',data['message']);
-				clearform();
-			}
-		   else if(data['status'] == 0){
-				alert_status('error',data['message']);
-				clearform();
-			}
-			quotes_data_view();
-		});
+		returnStatus = ajaxCall('POST','/login/user_login/',{'username':loginusername,'userpswd':loginuserpswd},false)
+		console.log("returnStatus====================>",returnStatus)
+		if(returnStatus){
+			window.location.href = "/home/"
+		}
+//		else{
+//			window.location.href = "/login/"
+//		}
 	}
 	
 })

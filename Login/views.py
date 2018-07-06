@@ -9,23 +9,28 @@ from django.conf import settings
 import redis
 import ast
 from django.contrib.auth.models import User 
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import mixins
-from rest_framework.decorators import api_view, permission_classes, renderer_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.decorators import api_view, permission_classes, renderer_classes, authentication_classes
+from rest_framework.permissions import IsAuthenticated,AllowAny
+from rest_framework.authentication import TokenAuthentication
 from .serializers import UserSerializer
 from django.utils.crypto import get_random_string
 redis_con = redis.StrictRedis(host="localhost", port="6379", db="0")
 
 @api_view(['GET'])
 @renderer_classes((TemplateHTMLRenderer,))
-def login(request):
+@permission_classes((AllowAny,))
+def loginTemplate(request):
     return Response({'template':'login'},template_name='login.html')
 
 @api_view(['POST'])
+@permission_classes((AllowAny,))
 def user_register(request):
     dict_data = {}
     data = request.data
@@ -53,18 +58,40 @@ def user_register(request):
         s = serializer.save()
         dict_data.update({'id':s.id})
         redis_con.set(unique_id,dict_data)
-        print redis_con.get(unique_id)
         sendMessage(request.POST.get('email'),subject,html)
-        return Response({"message": "User created"}) 
+        return Response({'status':1,"message": "User created"}) 
     else:
         data = {
-          "error": True,
-          "errors": serializer.errors,          
+           'status':0,
+           "error": True,
+           "message": serializer.errors,          
         }
         return Response(data)
     
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def user_login(request):
+    username = request.POST.get('username')
+    password = request.POST.get('userpswd')
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        # the password verified for the user
+        if user.is_active:
+            login(request, user)
+            return Response({'status':1,'message':'Successfully Login'})
+    return Response({'status':0,'message':'Login Failed!!!'})
+
 @api_view(['GET'])
 @renderer_classes((TemplateHTMLRenderer,))
+@permission_classes((AllowAny,))
+@login_required
+def home_page(request):
+    
+    return Response({'message':'Successfully Login'},template_name='index.html')
+
+@api_view(['GET'])
+@renderer_classes((TemplateHTMLRenderer,))
+@permission_classes((AllowAny,))
 def user_activate(request,token):
     data = {}
     if token in redis_con.keys():
