@@ -1,5 +1,20 @@
-// Animations init
-//new WOW().init();
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1)); 
+                break;
+            }    
+        }    
+    }    
+    return cookieValue;
+} 
+
+
 $("#loginhref").click(function(){
 	$("#registerPage").show();
 	$("#loginPage").hide();
@@ -32,16 +47,7 @@ function ajaxCall(type,url,data,async){
 		data:data,
 		async:async,
 	}).done(function(json_data){
-		if(json_data['status'] == 1){
-//			alert_status('success',json_data['message']);
-//			clearform();
-			status = true;
-		}
-	   else if(json_data['status'] == 0){
-//			alert_status('error',json_data['message']);
-//			clearform();
-			status = false;
-		}
+			status = json_data;
 	});
 	return status;
 }
@@ -89,7 +95,7 @@ $("#btn-signup").click(function(){
 	return false;
 	}
 	else {
-		ajaxCall('POST','user_register/',{"username":username,"email":usermail,"password":userpswd,"mobile_number":usernumber,'is_active':false},true)
+		ajaxCall('POST','user_register/',{"username":username,"email":usermail,"password":userpswd,"mobile_number":usernumber,'is_active':false,csrfmiddlewaretoken:getCookie('csrftoken')},true)
 	}
 
 
@@ -117,14 +123,14 @@ $("#btn-signin").click(function(){
 		return false;
 	}
 	else{
-		returnStatus = ajaxCall('POST','/login/user_login/',{'username':loginusername,'userpswd':loginuserpswd},false)
-		console.log("returnStatus====================>",returnStatus)
-		if(returnStatus){
-			window.location.href = "/home/"
-		}
-//		else{
-//			window.location.href = "/login/"
-//		}
+		returnStatus = ajaxCall('POST','/login/user_login/',{'username':loginusername,'userpswd':loginuserpswd,csrfmiddlewaretoken:getCookie('csrftoken')},false)
+		localStorage.setItem('token', JSON.stringify(returnStatus['token']));
+		if(returnStatus['status']==1 && returnStatus['token']!=undefined){
+		window.location.href = "/home/"
+	}
+	else{
+		window.location.href = "/login/"
+	}
 	}
 	
 })

@@ -11,6 +11,8 @@ import ast
 from django.contrib.auth.models import User 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+import json
+import requests
 # Create your views here.
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
@@ -22,6 +24,13 @@ from rest_framework.authentication import TokenAuthentication
 from .serializers import UserSerializer
 from django.utils.crypto import get_random_string
 redis_con = redis.StrictRedis(host="localhost", port="6379", db="0")
+
+def jwt_response_payload_handler(token, user=None, request=None):
+    request.user = user
+    return {
+        'token': token,
+        'user': UserSerializer(user, context={'request': request}).data,
+    }
 
 @api_view(['GET'])
 @renderer_classes((TemplateHTMLRenderer,))
@@ -59,7 +68,7 @@ def user_register(request):
         dict_data.update({'id':s.id})
         redis_con.set(unique_id,dict_data)
         sendMessage(request.POST.get('email'),subject,html)
-        return Response({'status':1,"message": "User created"}) 
+        return Response({'status':1,"message": "User created"})
     else:
         data = {
            'status':0,
@@ -71,6 +80,7 @@ def user_register(request):
 @api_view(['POST'])
 @permission_classes((AllowAny,))
 def user_login(request):
+    auth_url= "http://"+request.META.get("HTTP_HOST")+"/api-token-auth/"
     username = request.POST.get('username')
     password = request.POST.get('userpswd')
     user = authenticate(username=username, password=password)
@@ -78,15 +88,27 @@ def user_login(request):
         # the password verified for the user
         if user.is_active:
             login(request, user)
-            return Response({'status':1,'message':'Successfully Login'})
+            data={ 'username':username,'password':password}
+            headers = {'Content-Type': 'application/json'}
+            token=requests.post(auth_url,data=json.dumps(data),headers=headers)
+            token=json.loads(token.text)
+            token['status'] = 1
+            token['message'] = 'Successfully Login'
+            return Response(token)
     return Response({'status':0,'message':'Login Failed!!!'})
 
 @api_view(['GET'])
 @renderer_classes((TemplateHTMLRenderer,))
 @permission_classes((AllowAny,))
-@login_required
+def user_logout(request):
+    logout(request)
+    return Response({'template':'login'},template_name='login.html')
+
+@api_view(['GET'])
+@renderer_classes((TemplateHTMLRenderer,))
+@permission_classes((AllowAny,))
+@login_required(login_url='/login/')
 def home_page(request):
-    
     return Response({'message':'Successfully Login'},template_name='index.html')
 
 @api_view(['GET'])

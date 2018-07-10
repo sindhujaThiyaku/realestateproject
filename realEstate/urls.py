@@ -16,9 +16,12 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from Login import views
+from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/', include('Login.urls', namespace="Login")),
+    url(r'^logout/', views.user_logout,name='Logout'),
     url(r'^home/', views.home_page, name='home'),
+    url(r'^api-token-auth/', obtain_jwt_token),
 ]
