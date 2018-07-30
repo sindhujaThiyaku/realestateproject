@@ -3,3 +3,6 @@ encoding//Login/apps.py=utf-8
 encoding//Login/models.py=utf-8
 encoding//Login/tests.py=utf-8
 encoding//Login/views.py=utf-8
+encoding//sellProperty/apps.py=utf-8
+encoding//sellProperty/models.py=utf-8
+encoding//sellProperty/views.py=utf-8

@@ -16,7 +16,9 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from Login import views
-from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
+from rest_framework_jwt.views import obtain_jwt_token
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,4 +26,4 @@ urlpatterns = [
     url(r'^logout/', views.user_logout,name='Logout'),
     url(r'^home/', views.home_page, name='home'),
     url(r'^api-token-auth/', obtain_jwt_token),
-]
+]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

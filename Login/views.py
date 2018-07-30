@@ -52,7 +52,7 @@ def user_register(request):
             <html>
               <head></head>
               <body>
-                <p>Hi! """+ request.POST.get('username')+"""<br>
+                <p>Hi! """+ request.POST.get('username') +"""<br>
                     Welcome to Builder Hut and thank you for registering with us.<br>
                     To activate your account please verify your email address by clicking the link below:<br>
                     <a href='http://192.168.11.73:8000/login/account_verify/"""+unique_id+"""'>Activate your account</a><br>
