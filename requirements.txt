@@ -1,7 +1,6 @@
 Django==1.11.5
 PyJWT==1.6.4
 Pygments==2.2.0
-UNKNOWN==0.0.0
 argparse==1.2.1
 certifi==2018.4.16
 chardet==3.0.4
