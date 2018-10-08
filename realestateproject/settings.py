@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'Login',
     'corsheaders',
+    'emiCalc'
 ]
 
 CORS_ALLOW_HEADERS = (
