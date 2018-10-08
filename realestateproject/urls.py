@@ -1,4 +1,4 @@
-"""realEstate URL Configuration
+"""realestateproject URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -23,6 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/', include('Login.urls', namespace="Login")),
+    url(r'^emi/', include('emiCalc.urls', namespace="emi")),
     url(r'^logout/', views.user_logout,name='Logout'),
     url(r'^home/', views.home_page, name='home'),
     url(r'^api-token-auth/', obtain_jwt_token),
