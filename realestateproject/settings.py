@@ -101,10 +101,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'realEstate',
-        'USER': 'postgres',
-        'PASSWORD': '',
+        'USER': 'next',
+        'PASSWORD': 'next',
         'HOST': 'localhost',
-        'PORT': '5433'
+        'PORT': '5432'
     }
 }
 
