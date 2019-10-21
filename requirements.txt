@@ -1,4 +1,4 @@
-Django==1.11.5
+Django==1.11.23
 PyJWT==1.6.4
 Pygments==2.2.0
 argparse==1.2.1
